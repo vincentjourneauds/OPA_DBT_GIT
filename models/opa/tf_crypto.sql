@@ -1,0 +1,15 @@
+with final as (SELECT 
+a.TIMESTAMP, 
+a.OPEN , 
+a.HIGH, 
+a.LOW,
+a.CLOSE,
+a.VOLUME,
+a.VOLUME * a.CLOSE as VOL_VAL,
+b.CRYPTO_ID, a.start_date, a.end_date, c.GRANULARITE_ID
+FROM OPA.RAW_DATA.RAW_DATA a 
+JOIN OPA.RAW_DATA.TD_PARAM b on a.CRYPTO=b.crypto
+JOIN OPA.RAW_DATA.TD_GRANULARITE c on a.GRANULARITE=c.GRANULARITE
+)
+
+select * from final
